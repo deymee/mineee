@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>For My Princess ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+background:#070711;
+color:white;
+overflow-x:hidden;
+}
+
+/* BACKGROUND */
+
+.stars{
+position:fixed;
+inset:0;
+background:url("https://www.transparenttextures.com/patterns/stardust.png");
+opacity:0.25;
+z-index:-2;
+}
+
+.glow{
+position:fixed;
+width:500px;
+height:500px;
+background:#ff4d6d;
+filter:blur(180px);
+opacity:0.12;
+border-radius:50%;
+top:-150px;
+right:-100px;
+z-index:-3;
+}
+
+/* SECTIONS */
+
+section{
+min-height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+padding:40px 20px;
+text-align:center;
+animation:fade 1s ease;
+position:relative;
+}
+
+@keyframes fade{
+from{
+opacity:0;
+transform:translateY(30px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+/* TYPOGRAPHY */
+
+h1{
+font-size:clamp(40px,8vw,75px);
+margin-bottom:20px;
+color:#ff6b9c;
+}
+
+h2{
+font-size:clamp(28px,6vw,50px);
+margin-bottom:20px;
+}
+
+p{
+max-width:700px;
+font-size:clamp(17px,3vw,22px);
+line-height:1.8;
+color:#e7e7e7;
+margin-bottom:20px;
+}
+
+/* BUTTONS */
+
+button{
+padding:16px 34px;
+border:none;
+border-radius:999px;
+font-size:18px;
+font-weight:600;
+cursor:pointer;
+background:#ff4d6d;
+color:white;
+margin-top:20px;
+transition:0.35s;
+box-shadow:0 0 25px rgba(255,77,109,0.4);
+}
+
+button:hover{
+transform:scale(1.05);
+}
+
+/* MUSIC BUTTON */
+
+#musicBtn{
+position:fixed;
+bottom:20px;
+right:20px;
+z-index:1000;
+backdrop-filter:blur(10px);
+}
+
+/* GALLERY */
+
+.gallery{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+gap:24px;
+width:100%;
+max-width:1100px;
+margin-top:30px;
+}
+
+.gallery img{
+width:100%;
+height:auto;
+max-height:500px;
+object-fit:contain;
+border-radius:24px;
+background:#111;
+padding:5px;
+}
+
+.gallery img:hover{
+transform:translateY(-8px) scale(1.02);
+}
+
+/* VIDEO */
+
+.main-video{
+width:min(90%,700px);
+border-radius:28px;
+margin-top:30px;
+box-shadow:0 15px 40px rgba(0,0,0,0.6);
+}
+
+/* FINAL PHOTO */
+
+.final-photo{
+width:280px;
+height:280px;
+object-fit:cover;
+border-radius:30px;
+margin-top:30px;
+box-shadow:0 15px 40px rgba(0,0,0,0.5);
+}
+
+/* NO BUTTON */
+
+#no{
+position:absolute;
+background:#2c2c2c;
+}
+
+/* HEARTS */
+
+.heart{
+position:fixed;
+font-size:30px;
+color:#ff4d6d;
+animation:float 5s linear forwards;
+pointer-events:none;
+z-index:999;
+}
+
+@keyframes float{
+0%{
+transform:translateY(0) scale(1);
+opacity:1;
+}
+100%{
+transform:translateY(-110vh) scale(0);
+opacity:0;
+}
+}
+
+/* FINAL CARD */
+
+.final-card{
+background:rgba(255,255,255,0.05);
+padding:50px 30px;
+border-radius:35px;
+backdrop-filter:blur(12px);
+border:1px solid rgba(255,255,255,0.08);
+box-shadow:0 15px 50px rgba(0,0,0,0.5);
+max-width:850px;
+}
+
+/* HIDDEN */
+
+.hidden{
+display:none;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="stars"></div>
+<div class="glow"></div>
+
+<!-- MUSIC -->
+<!-- ADD YOUR SONG -->
+<audio id="bgMusic" loop>
+<source src="music.mp3" type="audio/mp3">
+</audio>
+
+<button id="musicBtn" onclick="playMusic()">
+🎵 Play Our Song
+</button>
+
+<!-- INTRO -->
+
+<section id="page1">
+
+<h1>For Rebecca ❤️</h1>
+
+<p id="typing"></p>
+
+<button onclick="startStory()">
+Start Our Story ❤️
+</button>
+
+</section>
+
+<!-- BEGINNING -->
+
+<section id="page2" class="hidden">
+
+<h1>The Beginning ❤️</h1>
+
+<p>
+Rebecca, from the moment we started talking,
+something about you felt different.
+</p>
+
+<p>
+I didn’t realize it then,
+but that moment became one of my favorite memories.
+</p>
+
+<div class="gallery">
+
+<!-- ADD YOUR PHOTOS -->
+<img src="pic1.jpeg">
+<img src="pic2.jpeg">
+
+</div>
+
+<button onclick="nextPage(3)">
+Next ❤️
+</button>
+
+</section>
+
+<!-- WHEN I FELL -->
+
+<section id="page3" class="hidden">
+
+<h1>When I Fell For You ❤️</h1>
+
+<p>
+That was the moment I realized
+you genuinely became special to me.
+</p>
+
+<!-- ADD YOUR VIDEO -->
+<video controls class="main-video" playsinline>
+
+<source src="when-i-fell.mp4" type="video/mp4">
+
+</video>
+
+<button onclick="nextPage(4)">
+Next ❤️
+</button>
+
+</section>
+
+<!-- GOOFY -->
+
+<section id="page4" class="hidden">
+
+<h1>Our Goofy Moments 😂</h1>
+
+<p>
+One thing I love about us
+is that we can always be ourselves.
+</p>
+
+<p>
+These moments honestly became
+some of my favorites ❤️
+</p>
+
+<div class="gallery">
+
+<!-- ADD YOUR GOOFY PHOTOS -->
+<img src="goofy1.jpeg">
+
+<img src="goofy2.jpeg">
+
+</div>
+
+<!-- ADD YOUR GOOFY VIDEO -->
+<video controls class="main-video" playsinline>
+
+<source src="goofy.mp4" type="video/mp4">
+
+</video>
+
+<button onclick="nextPage(5)">
+Next ❤️
+</button>
+
+</section>
+
+<!-- WHY -->
+
+<section id="page5" class="hidden">
+
+<h1>Why I Like You ❤️</h1>
+
+<div class="final-card">
+
+<p>❤️ Your smile</p>
+
+<p>❤️ Your energy</p>
+
+<p>❤️ The way you care</p>
+
+<p>❤️ How peaceful I feel around you</p>
+
+<p>❤️ The way you make ordinary moments feel special</p>
+
+</div>
+
+<button onclick="nextPage(6)">
+Next ❤️
+</button>
+
+</section>
+
+<!-- FUTURE -->
+
+<section id="page6" class="hidden">
+
+<h1>The Future I Want ❤️</h1>
+
+<p>
+More laughs.
+More memories.
+More random moments together.
+</p>
+
+<p>
+And hopefully something real between us.
+</p>
+
+<button onclick="nextPage(7)">
+Continue ❤️
+</button>
+
+</section>
+
+<!-- FINAL -->
+
+<section id="page7" class="hidden">
+
+<div class="final-card">
+
+<h1>Rebecca...</h1>
+
+<h2>Will You Be My Girlfriend? ❤️</h2>
+
+<p>
+Because honestly...
+I don’t want this to just stay as “almost”.
+</p>
+
+<div style="margin-top:30px;display:flex;gap:20px;justify-content:center;flex-wrap:wrap;">
+
+<button onclick="yesAnswer()">
+Yes ❤️
+</button>
+
+<button id="no" onmouseover="moveButton()">
+No 🙈
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+<script>
+
+/* PLAY MUSIC */
+
+function playMusic(){
+
+let music=document.getElementById("bgMusic")
+
+music.play()
+
+document.getElementById("musicBtn").style.display="none"
+
+}
+
+/* START STORY */
+
+function startStory(){
+
+playMusic()
+
+nextPage(2)
+
+}
+
+/* PAGE SWITCH */
+
+function nextPage(page){
+
+document.querySelectorAll("section").forEach(section=>{
+section.classList.add("hidden")
+})
+
+document.getElementById("page"+page).classList.remove("hidden")
+
+window.scrollTo({
+top:0,
+behavior:'smooth'
+})
+
+}
+
+/* YES ANSWER */
+
+function yesAnswer(){
+
+document.body.innerHTML=`
+
+<div class="stars"></div>
+<div class="glow"></div>
+
+<section>
+
+<h1>You Just Made Me The Happiest Guy ❤️</h1>
+
+<p>
+This is only the beginning for us, my princess.
+</p>
+
+<!-- FINAL PHOTO -->
+<img 
+src="final-us.jpeg"
+class="final-photo"
+>
+
+<p style="margin-top:30px;">
+❤️ Forever starts now ❤️
+</p>
+
+</section>
+
+`
+
+setInterval(createHeart,180)
+
+}
+
+/* HEARTS */
+
+function createHeart(){
+
+let heart=document.createElement("div")
+
+heart.className="heart"
+
+heart.innerHTML="❤️"
+
+heart.style.left=Math.random()*100+"vw"
+
+heart.style.animationDuration=(Math.random()*3+3)+"s"
+
+document.body.appendChild(heart)
+
+setTimeout(()=>{
+heart.remove()
+},5000)
+
+}
+
+/* MOVE BUTTON */
+
+function moveButton(){
+
+let button=document.getElementById("no")
+
+let x=Math.random()*(window.innerWidth-150)
+
+let y=Math.random()*(window.innerHeight-80)
+
+button.style.left=x+"px"
+
+button.style.top=y+"px"
+
+}
+
+/* TYPEWRITER */
+
+let text="My Princess, I made something special for you. A small journey through our memories and how I truly feel about you ❤️"
+
+let i=0
+
+function typing(){
+
+if(i<text.length){
+
+document.getElementById("typing").innerHTML += text.charAt(i)
+
+i++
+
+setTimeout(typing,35)
+
+}
+
+}
+
+typing()
+
+</script>
+
+</body>
+
+</html>
