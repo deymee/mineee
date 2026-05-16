@@ -125,7 +125,6 @@ position:fixed;
 bottom:20px;
 right:20px;
 z-index:1000;
-backdrop-filter:blur(10px);
 }
 
 /* GALLERY */
@@ -231,9 +230,7 @@ display:none;
 
 <!-- MUSIC -->
 <!-- ADD YOUR SONG -->
-<audio id="bgMusic" loop>
-<source src="music.mp3" type="audio/mp3">
-</audio>
+<audio id="bgMusic" loop preload="auto" src="music.mp3"></audio>
 
 <button id="musicBtn" onclick="playMusic()">
 🎵 Play Our Song
@@ -430,11 +427,28 @@ No 🙈
 
 function playMusic(){
 
-let music=document.getElementById("bgMusic")
+const music=document.getElementById("bgMusic")
+const btn=document.getElementById("musicBtn")
 
-music.play()
+const started=music.play()
 
-document.getElementById("musicBtn").style.display="none"
+if(started===undefined){
+btn.style.display="none"
+return
+}
+
+started.then(()=>{
+btn.style.display="none"
+}).catch(()=>{
+if(music.readyState<3){
+btn.textContent="🎵 Loading… tap again"
+music.addEventListener("canplay",()=>{
+btn.textContent="🎵 Play Our Song"
+},{once:true})
+}else{
+btn.textContent="🎵 Tap to Play Our Song"
+}
+})
 
 }
 
