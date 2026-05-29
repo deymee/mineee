@@ -118,15 +118,6 @@ button:hover{
 transform:scale(1.05);
 }
 
-/* MUSIC BUTTON */
-
-#musicBtn{
-position:fixed;
-bottom:20px;
-right:20px;
-z-index:1000;
-}
-
 /* GALLERY */
 
 .gallery{
@@ -146,6 +137,8 @@ object-fit:contain;
 border-radius:24px;
 background:#111;
 padding:5px;
+box-shadow:0 15px 35px rgba(0,0,0,0.5);
+transition:0.4s;
 }
 
 .gallery img:hover{
@@ -155,9 +148,12 @@ transform:translateY(-8px) scale(1.02);
 /* VIDEO */
 
 .main-video{
-width:min(90%,700px);
+width:min(95%,700px);
+height:auto;
+max-height:80vh;
 border-radius:28px;
 margin-top:30px;
+background:black;
 box-shadow:0 15px 40px rgba(0,0,0,0.6);
 }
 
@@ -175,8 +171,9 @@ box-shadow:0 15px 40px rgba(0,0,0,0.5);
 /* NO BUTTON */
 
 #no{
-position:absolute;
+position:relative;
 background:#2c2c2c;
+transition:0.2s;
 }
 
 /* HEARTS */
@@ -229,12 +226,10 @@ display:none;
 <div class="glow"></div>
 
 <!-- MUSIC -->
-<!-- ADD YOUR SONG -->
-<audio id="bgMusic" loop preload="auto" src="music.mp3"></audio>
 
-<button id="musicBtn" onclick="playMusic()">
-🎵 Play Our Song
-</button>
+<audio id="bgMusic" loop playsinline>
+<source src="music.mp3" type="audio/mpeg">
+</audio>
 
 <!-- INTRO -->
 
@@ -244,7 +239,7 @@ display:none;
 
 <p id="typing"></p>
 
-<button onclick="startStory()">
+<button id="startBtn">
 Start Our Story ❤️
 </button>
 
@@ -270,6 +265,7 @@ but that moment became one of my favorite memories.
 
 <!-- ADD YOUR PHOTOS -->
 <img src="pic1.jpeg">
+
 <img src="pic2.jpeg">
 
 </div>
@@ -423,44 +419,27 @@ No 🙈
 
 <script>
 
-/* PLAY MUSIC */
-
-function playMusic(){
-
-const music=document.getElementById("bgMusic")
-const btn=document.getElementById("musicBtn")
-
-const started=music.play()
-
-if(started===undefined){
-btn.style.display="none"
-return
-}
-
-started.then(()=>{
-btn.style.display="none"
-}).catch(()=>{
-if(music.readyState<3){
-btn.textContent="🎵 Loading… tap again"
-music.addEventListener("canplay",()=>{
-btn.textContent="🎵 Play Our Song"
-},{once:true})
-}else{
-btn.textContent="🎵 Tap to Play Our Song"
-}
-})
-
-}
+const music = document.getElementById("bgMusic")
 
 /* START STORY */
 
-function startStory(){
+document.getElementById("startBtn").addEventListener("click", async () => {
 
-playMusic()
+try{
+
+music.volume = 1
+
+await music.play()
+
+}catch(err){
+
+console.log("Music blocked:", err)
+
+}
 
 nextPage(2)
 
-}
+})
 
 /* PAGE SWITCH */
 
@@ -483,10 +462,14 @@ behavior:'smooth'
 
 function yesAnswer(){
 
+const music=document.getElementById("bgMusic")
+
 document.body.innerHTML=`
 
 <div class="stars"></div>
 <div class="glow"></div>
+
+<audio id="bgMusic" loop autoplay preload="auto" src="music.mp3"></audio>
 
 <section>
 
@@ -496,7 +479,6 @@ document.body.innerHTML=`
 This is only the beginning for us, my princess.
 </p>
 
-<!-- FINAL PHOTO -->
 <img 
 src="final-us.jpeg"
 class="final-photo"
@@ -509,6 +491,13 @@ class="final-photo"
 </section>
 
 `
+
+const newMusic=document.getElementById("bgMusic")
+
+if(music && !music.paused){
+newMusic.currentTime = music.currentTime
+newMusic.play().catch(()=>{})
+}
 
 setInterval(createHeart,180)
 
@@ -542,13 +531,11 @@ function moveButton(){
 
 let button=document.getElementById("no")
 
-let x=Math.random()*(window.innerWidth-150)
+let x=(Math.random()*200)-100
+let y=(Math.random()*120)-60
 
-let y=Math.random()*(window.innerHeight-80)
-
-button.style.left=x+"px"
-
-button.style.top=y+"px"
+button.style.transform=
+`translate(${x}px, ${y}px)`
 
 }
 
