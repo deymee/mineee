@@ -171,8 +171,9 @@ box-shadow:0 15px 40px rgba(0,0,0,0.5);
 /* NO BUTTON */
 
 #no{
-position:absolute;
+position:relative;
 background:#2c2c2c;
+transition:0.2s;
 }
 
 /* HEARTS */
@@ -422,19 +423,11 @@ const music = document.getElementById("bgMusic")
 
 /* START STORY */
 
-document.getElementById("startBtn").addEventListener("click", async () => {
+document.getElementById("startBtn").addEventListener("click", () => {
 
-try{
-
-music.volume = 1
-
-await music.play()
-
-}catch(err){
-
-console.log("Music blocked:", err)
-
-}
+music.play().catch(err=>{
+console.log(err)
+})
 
 nextPage(2)
 
@@ -461,12 +454,13 @@ behavior:'smooth'
 
 function yesAnswer(){
 
-document.body.innerHTML=`
+document.querySelectorAll("section").forEach(section=>{
+section.classList.add("hidden")
+})
 
-<div class="stars"></div>
-<div class="glow"></div>
+const success=document.createElement("section")
 
-<section>
+success.innerHTML=`
 
 <h1>You Just Made Me The Happiest Guy ❤️</h1>
 
@@ -474,8 +468,7 @@ document.body.innerHTML=`
 This is only the beginning for us, my princess.
 </p>
 
-<!-- FINAL PHOTO -->
-<img 
+<img
 src="final-us.jpeg"
 class="final-photo"
 >
@@ -484,9 +477,11 @@ class="final-photo"
 ❤️ Forever starts now ❤️
 </p>
 
-</section>
-
 `
+
+document.body.appendChild(success)
+
+music.play().catch(()=>{})
 
 setInterval(createHeart,180)
 
@@ -520,13 +515,11 @@ function moveButton(){
 
 let button=document.getElementById("no")
 
-let x=Math.random()*(window.innerWidth-150)
+let x=(Math.random()*240)-120
+let y=(Math.random()*120)-60
 
-let y=Math.random()*(window.innerHeight-80)
-
-button.style.left=x+"px"
-
-button.style.top=y+"px"
+button.style.transform=
+`translate(${x}px, ${y}px)`
 
 }
 
