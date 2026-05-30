@@ -419,14 +419,14 @@ No 🙈
 
 <script>
 
-const music = document.getElementById("bgMusic")
+const music=document.getElementById("bgMusic")
 
 /* START STORY */
 
-document.getElementById("startBtn").addEventListener("click", () => {
+document.getElementById("startBtn").addEventListener("click",()=>{
 
 music.play().catch(err=>{
-console.log(err)
+console.log("Music blocked:",err)
 })
 
 nextPage(2)
@@ -451,16 +451,16 @@ behavior:'smooth'
 }
 
 /* YES ANSWER */
+/* MUSIC STOPS HERE LIKE BEFORE */
 
 function yesAnswer(){
 
-document.querySelectorAll("section").forEach(section=>{
-section.classList.add("hidden")
-})
+document.body.innerHTML=`
 
-const success=document.createElement("section")
+<div class="stars"></div>
+<div class="glow"></div>
 
-success.innerHTML=`
+<section>
 
 <h1>You Just Made Me The Happiest Guy ❤️</h1>
 
@@ -477,11 +477,9 @@ class="final-photo"
 ❤️ Forever starts now ❤️
 </p>
 
+</section>
+
 `
-
-document.body.appendChild(success)
-
-music.play().catch(()=>{})
 
 setInterval(createHeart,180)
 
@@ -509,7 +507,7 @@ heart.remove()
 
 }
 
-/* MOVE BUTTON */
+/* NO BUTTON */
 
 function moveButton(){
 
