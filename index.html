@@ -227,9 +227,7 @@ display:none;
 
 <!-- MUSIC -->
 
-<audio id="bgMusic" loop playsinline>
-<source src="music.mp3" type="audio/mpeg">
-</audio>
+<audio id="bgMusic" loop preload="auto" src="music.mp3"></audio>
 
 <!-- INTRO -->
 
@@ -423,11 +421,19 @@ const music = document.getElementById("bgMusic")
 
 /* START STORY */
 
-document.getElementById("startBtn").addEventListener("click", () => {
+document.getElementById("startBtn").addEventListener("click", async () => {
 
-music.play().catch(err=>{
-console.log(err)
-})
+try{
+
+music.volume = 1
+
+await music.play()
+
+}catch(err){
+
+console.log("Music blocked:", err)
+
+}
 
 nextPage(2)
 
