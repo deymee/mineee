@@ -171,9 +171,8 @@ box-shadow:0 15px 40px rgba(0,0,0,0.5);
 /* NO BUTTON */
 
 #no{
-position:relative;
+position:absolute;
 background:#2c2c2c;
-transition:0.2s;
 }
 
 /* HEARTS */
@@ -462,14 +461,10 @@ behavior:'smooth'
 
 function yesAnswer(){
 
-const music=document.getElementById("bgMusic")
-
 document.body.innerHTML=`
 
 <div class="stars"></div>
 <div class="glow"></div>
-
-<audio id="bgMusic" loop autoplay preload="auto" src="music.mp3"></audio>
 
 <section>
 
@@ -479,6 +474,7 @@ document.body.innerHTML=`
 This is only the beginning for us, my princess.
 </p>
 
+<!-- FINAL PHOTO -->
 <img 
 src="final-us.jpeg"
 class="final-photo"
@@ -491,13 +487,6 @@ class="final-photo"
 </section>
 
 `
-
-const newMusic=document.getElementById("bgMusic")
-
-if(music && !music.paused){
-newMusic.currentTime = music.currentTime
-newMusic.play().catch(()=>{})
-}
 
 setInterval(createHeart,180)
 
@@ -531,11 +520,13 @@ function moveButton(){
 
 let button=document.getElementById("no")
 
-let x=(Math.random()*200)-100
-let y=(Math.random()*120)-60
+let x=Math.random()*(window.innerWidth-150)
 
-button.style.transform=
-`translate(${x}px, ${y}px)`
+let y=Math.random()*(window.innerHeight-80)
+
+button.style.left=x+"px"
+
+button.style.top=y+"px"
 
 }
 
